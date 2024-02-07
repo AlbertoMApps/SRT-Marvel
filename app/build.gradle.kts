@@ -67,7 +67,6 @@ dependencies {
     // Compose dependencies
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("com.google.accompanist:accompanist-flowlayout:0.17.0")
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.27.0")
 
     // Coroutines
     val coroutinesVersion = "1.7.1"
