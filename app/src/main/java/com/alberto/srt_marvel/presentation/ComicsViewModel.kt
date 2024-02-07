@@ -1,5 +1,6 @@
 package com.alberto.srt_marvel.presentation
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alberto.srt_marvel.data.remote.model.Comics
@@ -19,8 +20,8 @@ class ComicsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var comicsJob: Job? = null
-    private val _comicsState = MutableStateFlow(ComicsState())
-    val comicsState = _comicsState.asStateFlow()
+    private val _comicsState = mutableStateOf(ComicsState())
+    val comicsState = _comicsState
 
     init {
         getComics()
