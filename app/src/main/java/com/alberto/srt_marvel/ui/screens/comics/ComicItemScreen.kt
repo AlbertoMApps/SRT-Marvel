@@ -10,6 +10,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -26,13 +28,15 @@ fun ComicItemScreen(
     comic: ComicResult,
     onComicItemClick: (imageUrl: String) -> Unit
 ) {
-    val comicImage = comic.thumbnail?.path + "." + comic.thumbnail?.extension
+    val comicImage = remember {
+        mutableStateOf(comic.thumbnail?.path + "." + comic.thumbnail?.extension)
+    }//Used for recomposition in case there's new values.
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
-            .clickable { onComicItemClick(comicImage) }
+            .clickable { onComicItemClick(comicImage.value) }
     ) {
         Column(
             modifier = Modifier
@@ -44,7 +48,7 @@ fun ComicItemScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 AsyncImage(
-                    model = comicImage,
+                    model = comicImage.value,
                     placeholder = painterResource(id = R.drawable.ic_launcher_background),
                     contentDescription = comic.title,
                     modifier = Modifier
